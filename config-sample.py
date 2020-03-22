@@ -1,3 +1,6 @@
+#### Data ####
+datapath = "COVID-19"
+
 #### Database ####
 db_host = "localhost"
 db_port = "3306"
