@@ -1,0 +1,11 @@
+.idea
+config.py
+*.pyc
+db/config.sql
+Dokumentation/*.log
+Dokumentation/*.aux
+Dokumentation/*.toc
+Dokumentation/*.out
+Dokumentation/*.fls
+Dokumentation/*.synctex.gz
+Dokumentation/*.fdb_latexmk
