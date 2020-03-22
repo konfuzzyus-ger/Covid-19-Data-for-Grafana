@@ -39,16 +39,19 @@ if __name__ == '__main__':
         for i in range(1, l_main):
             len_side = len(totalCases[i])
             for j in range(4, len_side, 3):
+                per = 0
                 per1 = 0
                 per2 = 0
                 if ((float(totalCases[i][j]) != 0) & (j+1 < len_side)):
                     per1 = ((float(totalCases[i][j+1]) / float(totalCases[i][j]))-1)*100
                 else:
-                    continue
+                    if (j+1 >= len_side):
+                        continue
                 if ((float(totalCases[i][j+1]) != 0) & (j + 2 < len_side)):
                     per2 = ((float(totalCases[i][j + 2]) / float(totalCases[i][j+1])) - 1) * 100
                 else:
-                    continue
+                    if (j + 2 >= len_side):
+                        continue
                 per = (per1 + per2) / 2
                 try:
                     if (totalCases[i][0] == ''):
@@ -61,6 +64,7 @@ if __name__ == '__main__':
         for i in range(1, l_main):
             len_side = len(totalCases[i])
             for j in range(4, len_side, 5):
+                per = 0
                 per1 = 0
                 per2 = 0
                 per3 = 0
@@ -68,19 +72,23 @@ if __name__ == '__main__':
                 if ((float(totalCases[i][j]) != 0) & (j+1 < len_side)):
                     per1 = ((float(totalCases[i][j+1]) / float(totalCases[i][j]))-1)*100
                 else:
-                    continue
+                    if (j+1 >= len_side):
+                        continue
                 if ((float(totalCases[i][j+1]) != 0) & (j + 2 < len_side)):
                     per2 = ((float(totalCases[i][j + 2]) / float(totalCases[i][j+1])) - 1) * 100
                 else:
-                    continue
+                    if (j + 2 >= len_side):
+                        continue
                 if ((float(totalCases[i][j+2]) != 0) & (j + 3 < len_side)):
                     per3 = ((float(totalCases[i][j + 3]) / float(totalCases[i][j+2])) - 1) * 100
                 else:
-                    continue
+                    if (j+3 >= len_side):
+                        continue
                 if ((float(totalCases[i][j+3]) != 0) & (j + 4 < len_side)):
                     per4 = ((float(totalCases[i][j + 4]) / float(totalCases[i][j+3])) - 1) * 100
                 else:
-                    continue
+                    if  (j+4 >= len_side):
+                        continue
                 per = (per1 + per2 + per3 + per4) / 4
                 try:
                     if (totalCases[i][0] == ''):
@@ -93,6 +101,7 @@ if __name__ == '__main__':
         for i in range(1, l_main):
             len_side = len(totalCases[i])
             for j in range(4, len_side, 7):
+                per = 0
                 per1 = 0
                 per2 = 0
                 per3 = 0
@@ -102,27 +111,33 @@ if __name__ == '__main__':
                 if ((float(totalCases[i][j]) != 0) & (j+1 < len_side)):
                     per1 = ((float(totalCases[i][j+1]) / float(totalCases[i][j]))-1)*100
                 else:
-                    continue
+                    if (j+1 >= len_side):
+                        continue
                 if ((float(totalCases[i][j+1]) != 0) & (j + 2 < len_side)):
                     per2 = ((float(totalCases[i][j + 2]) / float(totalCases[i][j+1])) - 1) * 100
                 else:
-                    continue
+                    if (j+2 >= len_side):
+                        continue
                 if ((float(totalCases[i][j+2]) != 0) & (j + 3 < len_side)):
                     per3 = ((float(totalCases[i][j + 3]) / float(totalCases[i][j+2])) - 1) * 100
                 else:
-                    continue
+                    if (j+3 >= len_side):
+                        continue
                 if ((float(totalCases[i][j+3]) != 0) & (j + 4 < len_side)):
                     per4 = ((float(totalCases[i][j + 4]) / float(totalCases[i][j+3])) - 1) * 100
                 else:
-                    continue
+                    if (j+4 >= len_side):
+                        continue
                 if ((float(totalCases[i][j+4]) != 0) & (j + 5 < len_side)):
                     per5 = ((float(totalCases[i][j + 5]) / float(totalCases[i][j+4])) - 1) * 100
                 else:
-                    continue
+                    if  (j+5 >= len_side):
+                        continue
                 if ((float(totalCases[i][j+5]) != 0) & (j + 6 < len_side)):
                     per6 = ((float(totalCases[i][j + 6]) / float(totalCases[i][j+5])) - 1) * 100
                 else:
-                    continue
+                    if  (j+6 >= len_side):
+                        continue
                 per = (per1 + per2 + per3 + per4 + per5 + per6) / 6
                 try:
                     if (totalCases[i][0] == ''):
