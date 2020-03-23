@@ -17,7 +17,7 @@ if __name__ == '__main__':
         for row in spamreader:
             totalCases.append([])
             l = len(row)
-            for i in range(l-1):
+            for i in range(l):
                 totalCases[c].append(row[i])
             c = c + 1
         l_main = len(totalCases)
@@ -157,4 +157,3 @@ if __name__ == '__main__':
                         datatbaseConnect.insertTotalCases(totalCases[0][j], totalCases[i][j], totalCases[i][1] + ", " + totalCases[i][0])
                 except:
                     pass
-        pprint(totalCases)

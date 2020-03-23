@@ -54,9 +54,6 @@ def QueryDBParameterWOO(query, par):
 
 def insertTotalCases(date, cases, country):
     date = helper.formatDateTime(date)
-    print(date)
-    print(cases)
-    print(country)
     SQLReq = "INSERT INTO " + config.db_prefix + "originalData (datetime, cases, country) VALUES ( %s , %s , %s );"
     tmp = []
     tmp.append(date)
@@ -67,9 +64,6 @@ def insertTotalCases(date, cases, country):
 
 def insertPercentage1D(date, percentage, country):
     date = helper.formatDateTime(date)
-    print(date)
-    print(percentage)
-    print(country)
     SQLReq = "INSERT INTO " + config.db_prefix + "percentage1d (date, percentage, country) VALUES ( %s , %s , %s );"
     tmp = []
     tmp.append(date)
@@ -80,9 +74,6 @@ def insertPercentage1D(date, percentage, country):
 
 def insertPercentage3D(date, percentage, country):
     date = helper.formatDateTime(date)
-    print(date)
-    print(percentage)
-    print(country)
     SQLReq = "INSERT INTO " + config.db_prefix + "percentage3d (date, percentage, country) VALUES ( %s , %s , %s );"
     tmp = []
     tmp.append(date)
@@ -93,9 +84,6 @@ def insertPercentage3D(date, percentage, country):
 
 def insertPercentage5D(date, percentage, country):
     date = helper.formatDateTime(date)
-    print(date)
-    print(percentage)
-    print(country)
     SQLReq = "INSERT INTO " + config.db_prefix + "percentage5d (date, percentage, country) VALUES ( %s , %s , %s );"
     tmp = []
     tmp.append(date)
@@ -106,9 +94,6 @@ def insertPercentage5D(date, percentage, country):
 
 def insertPercentage7D(date, percentage, country):
     date = helper.formatDateTime(date)
-    print(date)
-    print(percentage)
-    print(country)
     SQLReq = "INSERT INTO " + config.db_prefix + "percentage7d (date, percentage, country) VALUES ( %s , %s , %s );"
     tmp = []
     tmp.append(date)
