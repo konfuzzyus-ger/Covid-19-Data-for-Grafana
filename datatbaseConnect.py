@@ -12,12 +12,14 @@ dbConnectCfg = {
     'database' : config.db_scheme
 }
 
-def QueryDB(query):
+def QueryDB(query, fetch):
     cnx = mysql.connector.connect(**dbConnectCfg)
     cursor = cnx.cursor()
 
     cursor.execute(query)
-    result = cursor.fetchall()
+    result = ''
+    if (fetch):
+        result = cursor.fetchall()
     cursor.close()
     cnx.close()
     if (config.debug):
