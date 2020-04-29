@@ -75,11 +75,11 @@
                 },
                 {
                   "color": "#EAB839",
-                  "value": 100000
+                  "value": 200000
                 },
                 {
                   "color": "red",
-                  "value": 150000
+                  "value": 250000
                 }
               ]
             },
@@ -170,11 +170,11 @@
                 },
                 {
                   "color": "#EAB839",
-                  "value": 8
+                  "value": 0.85
                 },
                 {
                   "color": "red",
-                  "value": 10
+                  "value": 1
                 }
               ]
             },
@@ -2773,5 +2773,5 @@
   "variables": {
     "list": []
   },
-  "version": 100
+  "version": 103
 }
