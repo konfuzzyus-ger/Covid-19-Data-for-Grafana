@@ -51,7 +51,13 @@ if __name__ == '__main__':
                 except:
                     pass
                 diff = float(totalCases[i][j+1]) - float(totalCases[i][j])
-                datatbaseConnect.insertDiffCases1D(totalCases[0][j+1], diff, totalCases[i][1])
+                try:
+                    if (totalCases[i][0] == ''):
+                        datatbaseConnect.insertDiffCases1D(totalCases[0][j+1], diff, totalCases[i][1])
+                    else:
+                        datatbaseConnect.insertDiffCases1D(totalCases[0][j + 1], diff, totalCases[i][1] + ", " + totalCases[i][0])
+                except:
+                    pass
         # precentage for 3 days
         print("percentage for 3 days")
         for i in range(1, l_main):
