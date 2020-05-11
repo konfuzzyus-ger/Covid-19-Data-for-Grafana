@@ -1068,6 +1068,393 @@
         "y": 27
       },
       "hiddenSeries": false,
+      "id": 20,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "country",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  datetime AS \"time\",\n  country AS metric,\n  cases\nFROM 2020_diff1d\nWHERE\n  $__timeFilter(datetime) AND\n  country = 'Germany'\nORDER BY datetime",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "percentage"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "2020_percentage1d",
+          "timeColumn": "date",
+          "timeColumnType": "date",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "country",
+                "=",
+                "'Germany'"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "country",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  datetime AS \"time\",\n  country AS metric,\n  cases\nFROM 2020_diff1d\nWHERE\n  $__timeFilter(datetime) AND\n  country = 'Austria'\nORDER BY datetime",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "percentage"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "2020_percentage1d",
+          "timeColumn": "date",
+          "timeColumnType": "date",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "country",
+                "=",
+                "'Austria'"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "country",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  datetime AS \"time\",\n  country AS metric,\n  cases\nFROM 2020_diff1d\nWHERE\n  $__timeFilter(datetime) AND\n  country = 'Italy'\nORDER BY datetime",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "percentage"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "2020_percentage1d",
+          "timeColumn": "date",
+          "timeColumnType": "date",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "country",
+                "=",
+                "'Italy'"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "country",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  datetime AS \"time\",\n  country AS metric,\n  cases\nFROM 2020_diff1d\nWHERE\n  $__timeFilter(datetime) AND\n  country = 'France'\nORDER BY datetime",
+          "refId": "D",
+          "select": [
+            [
+              {
+                "params": [
+                  "percentage"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "2020_percentage1d",
+          "timeColumn": "date",
+          "timeColumnType": "date",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "country",
+                "=",
+                "'France'"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "country",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  datetime AS \"time\",\n  country AS metric,\n  cases\nFROM 2020_diff1d\nWHERE\n  $__timeFilter(datetime) AND\n  country = 'Spain'\nORDER BY datetime",
+          "refId": "E",
+          "select": [
+            [
+              {
+                "params": [
+                  "percentage"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "2020_percentage1d",
+          "timeColumn": "date",
+          "timeColumnType": "date",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "country",
+                "=",
+                "'Spain'"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "country",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  datetime AS \"time\",\n  country AS metric,\n  cases\nFROM 2020_diff1d\nWHERE\n  $__timeFilter(datetime) AND\n  country = 'US'\nORDER BY datetime",
+          "refId": "F",
+          "select": [
+            [
+              {
+                "params": [
+                  "percentage"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "2020_percentage1d",
+          "timeColumn": "date",
+          "timeColumnType": "date",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "country",
+                "=",
+                "'US'"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "country",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  datetime AS \"time\",\n  country AS metric,\n  cases\nFROM 2020_diff1d\nWHERE\n  $__timeFilter(datetime) AND\n  country = 'China, Hubei'\nORDER BY datetime",
+          "refId": "G",
+          "select": [
+            [
+              {
+                "params": [
+                  "percentage"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "2020_percentage1d",
+          "timeColumn": "date",
+          "timeColumnType": "date",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "country",
+                "=",
+                "'China, Hubei'"
+              ],
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "country",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  datetime AS \"time\",\n  country AS metric,\n  cases\nFROM 2020_diff1d\nWHERE\n  $__timeFilter(datetime) AND\n  country = 'Sweden'\nORDER BY datetime",
+          "refId": "H",
+          "select": [
+            [
+              {
+                "params": [
+                  "percentage"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "2020_percentage1d",
+          "timeColumn": "date",
+          "timeColumnType": "date",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            },
+            {
+              "datatype": "varchar",
+              "name": "",
+              "params": [
+                "country",
+                "=",
+                "'Sweden'"
+              ],
+              "type": "expression"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "COVID-19 - Central Europe, US and Hubei (China)  - Difference 1 Day",
+      "tooltip": {
+        "shared": true,
+        "sort": 2,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 2,
+          "format": "short",
+          "label": "increase in total persons",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "MySQL-sars-cov-2",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 36
+      },
+      "hiddenSeries": false,
       "id": 12,
       "legend": {
         "avg": false,
@@ -1442,7 +1829,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 36
+        "y": 45
       },
       "hiddenSeries": false,
       "id": 13,
@@ -1819,7 +2206,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 45
+        "y": 54
       },
       "hiddenSeries": false,
       "id": 14,
@@ -2197,7 +2584,7 @@
         "h": 11,
         "w": 24,
         "x": 0,
-        "y": 54
+        "y": 63
       },
       "hiddenSeries": false,
       "id": 2,
@@ -2312,7 +2699,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 65
+        "y": 74
       },
       "hiddenSeries": false,
       "id": 5,
@@ -2422,7 +2809,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 74
+        "y": 83
       },
       "hiddenSeries": false,
       "id": 7,
@@ -2532,7 +2919,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 83
+        "y": 92
       },
       "hiddenSeries": false,
       "id": 9,
@@ -2642,7 +3029,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 92
+        "y": 101
       },
       "hiddenSeries": false,
       "id": 10,
@@ -2773,5 +3160,5 @@
   "variables": {
     "list": []
   },
-  "version": 103
+  "version": 107
 }
