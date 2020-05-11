@@ -24,6 +24,7 @@ if __name__ == '__main__':
         l_main = len(totalCases)
         #clear tables
         print('truncate')
+        datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "diff1d ;", False)
         datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "percentage1d ;", False)
         datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "percentage3d ;", False)
         datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "percentage5d ;", False)
@@ -49,6 +50,8 @@ if __name__ == '__main__':
                         datatbaseConnect.insertPercentage1D(totalCases[0][j+1], per, totalCases[i][1] + ", " + totalCases[i][0])
                 except:
                     pass
+                diff = float(totalCases[i][j+1]) - float(totalCases[i][j])
+                datatbaseConnect.insertDiffCases1D(totalCases[0][j+1], diff, totalCases[i][1])
         # precentage for 3 days
         print("percentage for 3 days")
         for i in range(1, l_main):

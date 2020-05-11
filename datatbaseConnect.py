@@ -104,6 +104,16 @@ def insertPercentage7D(date, percentage, country):
     QueryDBParameterWOO(SQLReq, tmp)
     return
 
+def insertDiffCases1D(date, cases, country):
+    date = helper.formatDateTime(date)
+    SQLReq = "INSERT INTO " + config.db_prefix + "diff1d (datetime, cases, country) VALUES ( %s , %s , %s );"
+    tmp = []
+    tmp.append(date)
+    tmp.append(cases)
+    tmp.append(country)
+    QueryDBParameterWOO(SQLReq, tmp)
+    return
+
 #### DO NOT CHANGE ####
 if __name__ == "__main__":
     exit(1)

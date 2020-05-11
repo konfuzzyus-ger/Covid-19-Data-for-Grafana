@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 10.150.1.49
--- Erstellungszeit: 27. Mrz 2020 um 01:30
+-- Erstellungszeit: 11. Mai 2020 um 13:36
 -- Server-Version: 10.3.22-MariaDB-0+deb10u1
--- PHP-Version: 7.4.2
+-- PHP-Version: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,19 @@ SET time_zone = "+00:00";
 --
 -- Datenbank: `sars-cov-2`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `2020_diff1d`
+--
+
+CREATE TABLE `2020_diff1d` (
+  `id` int(11) NOT NULL,
+  `datetime` date NOT NULL,
+  `cases` int(11) NOT NULL,
+  `country` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -92,6 +105,13 @@ CREATE TABLE `2020_percentage7d` (
 --
 
 --
+-- Indizes für die Tabelle `2020_diff1d`
+--
+ALTER TABLE `2020_diff1d`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `datetime-country-index` (`datetime`,`country`);
+
+--
 -- Indizes für die Tabelle `2020_originalData`
 --
 ALTER TABLE `2020_originalData`
@@ -129,6 +149,12 @@ ALTER TABLE `2020_percentage7d`
 --
 -- AUTO_INCREMENT für exportierte Tabellen
 --
+
+--
+-- AUTO_INCREMENT für Tabelle `2020_diff1d`
+--
+ALTER TABLE `2020_diff1d`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `2020_originalData`
