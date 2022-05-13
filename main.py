@@ -4,11 +4,19 @@ from pprint import pprint
 import datetime
 import helper
 import datatbaseConnect
-import config
 import csv
 import time
 
 if __name__ == '__main__':
+    dbConnectCfg = {
+        'user': config.db_user,
+        'password': config.db_password,
+        'host': config.db_host,
+        'port': config.db_port,
+        'database': config.db_scheme
+    }
+    dbConnectionRaw = mysql.connector.connect(**dbConnectCfg)
+    dbConnection = dbConnectionRaw.cursor()
     pathFile = config.datapath + '/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'
     with open(pathFile, newline='') as csvfile:
         spamreader = csv.reader(csvfile)
@@ -24,12 +32,12 @@ if __name__ == '__main__':
         l_main = len(totalCases)
         #clear tables
         print('truncate')
-        datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "diff1d ;", False)
-        datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "percentage1d ;", False)
-        datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "percentage3d ;", False)
-        datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "percentage5d ;", False)
-        datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "percentage7d ;", False)
-        datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "originalData ;", False)
+        datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "diff1d ;", False, dbConnection)
+        datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "percentage1d ;", False, dbConnection)
+        datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "percentage3d ;", False, dbConnection)
+        datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "percentage5d ;", False, dbConnection)
+        datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "percentage7d ;", False, dbConnection)
+        datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "originalData ;", False, dbConnection)
         print('truncate done')
         time.sleep(10)
         # percentage for one day
@@ -45,17 +53,17 @@ if __name__ == '__main__':
                         per = ((float(totalCases[i][j]) / float(totalCases[i][j])) - 1) * 100
                 try:
                     if (totalCases[i][0] == ''):
-                        datatbaseConnect.insertPercentage1D(totalCases[0][j+1], per, totalCases[i][1])
+                        datatbaseConnect.insertPercentage1D(totalCases[0][j+1], per, totalCases[i][1], dbConnection)
                     else:
-                        datatbaseConnect.insertPercentage1D(totalCases[0][j+1], per, totalCases[i][1] + ", " + totalCases[i][0])
+                        datatbaseConnect.insertPercentage1D(totalCases[0][j+1], per, totalCases[i][1] + ", " + totalCases[i][0], dbConnection)
                 except:
                     pass
                 diff = float(totalCases[i][j+1]) - float(totalCases[i][j])
                 try:
                     if (totalCases[i][0] == ''):
-                        datatbaseConnect.insertDiffCases1D(totalCases[0][j+1], diff, totalCases[i][1])
+                        datatbaseConnect.insertDiffCases1D(totalCases[0][j+1], diff, totalCases[i][1], dbConnection)
                     else:
-                        datatbaseConnect.insertDiffCases1D(totalCases[0][j + 1], diff, totalCases[i][1] + ", " + totalCases[i][0])
+                        datatbaseConnect.insertDiffCases1D(totalCases[0][j + 1], diff, totalCases[i][1] + ", " + totalCases[i][0], dbConnection)
                 except:
                     pass
         # precentage for 3 days
@@ -86,9 +94,9 @@ if __name__ == '__main__':
                     per = (per1 + per2) / 2
                     try:
                         if (totalCases[i][0] == ''):
-                            datatbaseConnect.insertPercentage3D(totalCases[0][j+1], per, totalCases[i][1])
+                            datatbaseConnect.insertPercentage3D(totalCases[0][j+1], per, totalCases[i][1], dbConnection)
                         else:
-                            datatbaseConnect.insertPercentage3D(totalCases[0][j+1], per, totalCases[i][1] + ", " + totalCases[i][0])
+                            datatbaseConnect.insertPercentage3D(totalCases[0][j+1], per, totalCases[i][1] + ", " + totalCases[i][0], dbConnection)
                     except:
                         pass
             except:
@@ -139,9 +147,9 @@ if __name__ == '__main__':
                     per = (per1 + per2 + per3 + per4) / 4
                     try:
                         if (totalCases[i][0] == ''):
-                            datatbaseConnect.insertPercentage5D(totalCases[0][j+2], per, totalCases[i][1])
+                            datatbaseConnect.insertPercentage5D(totalCases[0][j+2], per, totalCases[i][1], dbConnection)
                         else:
-                            datatbaseConnect.insertPercentage5D(totalCases[0][j+2], per, totalCases[i][1] + ", " + totalCases[i][0])
+                            datatbaseConnect.insertPercentage5D(totalCases[0][j+2], per, totalCases[i][1] + ", " + totalCases[i][0], dbConnection)
                     except:
                         pass
             except:
@@ -210,9 +218,9 @@ if __name__ == '__main__':
                     per = (per1 + per2 + per3 + per4 + per5 + per6) / 6
                     try:
                         if (totalCases[i][0] == ''):
-                            datatbaseConnect.insertPercentage7D(totalCases[0][j+3], per, totalCases[i][1])
+                            datatbaseConnect.insertPercentage7D(totalCases[0][j+3], per, totalCases[i][1], dbConnection)
                         else:
-                            datatbaseConnect.insertPercentage7D(totalCases[0][j+3], per, totalCases[i][1] + ", " + totalCases[i][0])
+                            datatbaseConnect.insertPercentage7D(totalCases[0][j+3], per, totalCases[i][1] + ", " + totalCases[i][0], dbConnection)
                     except:
                         pass
             except:
@@ -230,13 +238,15 @@ if __name__ == '__main__':
                 try:
                     if (checkNumber):
                         if (totalCases[i][0] == ''):
-                            datatbaseConnect.insertTotalCases(totalCases[0][j], totalCases[i][j], totalCases[i][1])
+                            datatbaseConnect.insertTotalCases(totalCases[0][j], totalCases[i][j], totalCases[i][1], dbConnection)
                         else:
-                            datatbaseConnect.insertTotalCases(totalCases[0][j], totalCases[i][j], totalCases[i][1] + ", " + totalCases[i][0])
+                            datatbaseConnect.insertTotalCases(totalCases[0][j], totalCases[i][j], totalCases[i][1] + ", " + totalCases[i][0], dbConnection)
                     else:
                         if (totalCases[i][0] == ''):
-                            datatbaseConnect.insertTotalCases(totalCases[0][j], totalCases[i][j-1], totalCases[i][1])
+                            datatbaseConnect.insertTotalCases(totalCases[0][j], totalCases[i][j-1], totalCases[i][1], dbConnection)
                         else:
-                            datatbaseConnect.insertTotalCases(totalCases[0][j], totalCases[i][j-1], totalCases[i][1] + ", " + totalCases[i][0])
+                            datatbaseConnect.insertTotalCases(totalCases[0][j], totalCases[i][j-1], totalCases[i][1] + ", " + totalCases[i][0], dbConnection)
                 except:
                     pass
+    dbConnectionRaw.commit();
+    dbConnectionRaw.close()
