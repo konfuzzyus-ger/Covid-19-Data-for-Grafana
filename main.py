@@ -1,3 +1,5 @@
+import sys
+
 import mysql.connector
 import config
 from pprint import pprint
@@ -7,7 +9,7 @@ import datatbaseConnect
 import csv
 import time
 
-if __name__ == '__main__':
+def main():
     dbConnectCfg = {
         'user': config.db_user,
         'password': config.db_password,
@@ -22,13 +24,7 @@ if __name__ == '__main__':
         spamreader = csv.reader(csvfile)
         totalCases = []
         percentage1d = []
-        c = 0
-        for row in spamreader:
-            totalCases.append([])
-            l = len(row)
-            for i in range(l):
-                totalCases[c].append(row[i])
-            c = c + 1
+        totalCases = list(spamreader)
         l_main = len(totalCases)
         #clear tables
         print('truncate')
@@ -250,3 +246,6 @@ if __name__ == '__main__':
                     pass
     dbConnectionRaw.commit();
     dbConnectionRaw.close()
+
+if __name__ == '__main__':
+    sys.exit(main())
