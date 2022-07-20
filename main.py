@@ -19,24 +19,23 @@ def main():
     }
     dbConnectionRaw = mysql.connector.connect(**dbConnectCfg)
     dbConnection = dbConnectionRaw.cursor()
-    pathFile = config.datapath + '/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'
-    with open(pathFile, newline='') as csvfile:
+    pathFile = f'{config.datapath}/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'
+    with open(pathFile, encoding="utf-8", errors="ignore", newline='') as csvfile:
         spamreader = csv.reader(csvfile)
-        totalCases = []
-        percentage1d = []
         totalCases = list(spamreader)
         l_main = len(totalCases)
         #clear tables
         print('truncate')
-        datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "diff1d ;", False, dbConnection)
-        datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "percentage1d ;", False, dbConnection)
-        datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "percentage3d ;", False, dbConnection)
-        datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "percentage5d ;", False, dbConnection)
-        datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "percentage7d ;", False, dbConnection)
-        datatbaseConnect.QueryDB("TRUNCATE " + config.db_prefix + "originalData ;", False, dbConnection)
+        datatbaseConnect.QueryDB(f"TRUNCATE {config.db_prefix}diff1d ;", False, dbConnection)
+        datatbaseConnect.QueryDB(f"TRUNCATE {config.db_prefix}percentage1d ;", False, dbConnection)
+        datatbaseConnect.QueryDB(f"TRUNCATE {config.db_prefix}percentage3d ;", False, dbConnection)
+        datatbaseConnect.QueryDB(f"TRUNCATE {config.db_prefix}percentage5d ;", False, dbConnection)
+        datatbaseConnect.QueryDB(f"TRUNCATE {config.db_prefix}percentage7d ;", False, dbConnection)
+        datatbaseConnect.QueryDB(f"TRUNCATE {config.db_prefix}originalData ;", False, dbConnection)
         print('truncate done')
-        time.sleep(10)
         # percentage for one day
+        dataP1 = []
+        dataD1 = []
         print("percentage for one day")
         for i in range(1, l_main):
             len_side = len(totalCases[i])
@@ -49,20 +48,23 @@ def main():
                         per = ((float(totalCases[i][j]) / float(totalCases[i][j])) - 1) * 100
                 try:
                     if (totalCases[i][0] == ''):
-                        datatbaseConnect.insertPercentage1D(totalCases[0][j+1], per, totalCases[i][1], dbConnection)
+                        dataP1.append([totalCases[0][j+1], per, totalCases[i][1]])
                     else:
-                        datatbaseConnect.insertPercentage1D(totalCases[0][j+1], per, totalCases[i][1] + ", " + totalCases[i][0], dbConnection)
+                        dataP1.append([totalCases[0][j+1], per, totalCases[i][1] + ", " + totalCases[i][0]])
                 except:
                     pass
                 diff = float(totalCases[i][j+1]) - float(totalCases[i][j])
                 try:
                     if (totalCases[i][0] == ''):
-                        datatbaseConnect.insertDiffCases1D(totalCases[0][j+1], diff, totalCases[i][1], dbConnection)
+                        dataD1.append([totalCases[0][j+1], diff, totalCases[i][1]])
                     else:
-                        datatbaseConnect.insertDiffCases1D(totalCases[0][j + 1], diff, totalCases[i][1] + ", " + totalCases[i][0], dbConnection)
+                        dataD1.append([totalCases[0][j + 1], diff, totalCases[i][1] + ", " + totalCases[i][0]])
                 except:
                     pass
+        datatbaseConnect.insertPercentage1D(dataP1, dbConnection)
+        datatbaseConnect.insertDiffCases1D(dataD1, dbConnection)
         # precentage for 3 days
+        dataP3 = []
         print("percentage for 3 days")
         for i in range(1, l_main):
             len_side = len(totalCases[i])
@@ -90,14 +92,16 @@ def main():
                     per = (per1 + per2) / 2
                     try:
                         if (totalCases[i][0] == ''):
-                            datatbaseConnect.insertPercentage3D(totalCases[0][j+1], per, totalCases[i][1], dbConnection)
+                            dataP3.append([totalCases[0][j+1], per, totalCases[i][1]])
                         else:
-                            datatbaseConnect.insertPercentage3D(totalCases[0][j+1], per, totalCases[i][1] + ", " + totalCases[i][0], dbConnection)
+                            dataP3.append([totalCases[0][j+1], per, totalCases[i][1] + ", " + totalCases[i][0]])
                     except:
                         pass
             except:
                 continue
+        datatbaseConnect.insertPercentage3D(dataP3, dbConnection)
         # precentage for 5 days
+        dataP5 = []
         print("percentage for 5 days")
         for i in range(1, l_main):
             len_side = len(totalCases[i])
@@ -143,14 +147,17 @@ def main():
                     per = (per1 + per2 + per3 + per4) / 4
                     try:
                         if (totalCases[i][0] == ''):
-                            datatbaseConnect.insertPercentage5D(totalCases[0][j+2], per, totalCases[i][1], dbConnection)
+                            dataP5.append([totalCases[0][j+2], per, totalCases[i][1]])
+
                         else:
-                            datatbaseConnect.insertPercentage5D(totalCases[0][j+2], per, totalCases[i][1] + ", " + totalCases[i][0], dbConnection)
+                            dataP5.append([totalCases[0][j+2], per, totalCases[i][1] + ", " + totalCases[i][0]])
                     except:
                         pass
             except:
                 continue
+        datatbaseConnect.insertPercentage5D(dataP5, dbConnection)
         # precentage for 7 days
+        dataP7 = []
         print("percentage for 5 days")
         for i in range(1, l_main):
             len_side = len(totalCases[i])
@@ -214,14 +221,16 @@ def main():
                     per = (per1 + per2 + per3 + per4 + per5 + per6) / 6
                     try:
                         if (totalCases[i][0] == ''):
-                            datatbaseConnect.insertPercentage7D(totalCases[0][j+3], per, totalCases[i][1], dbConnection)
+                            dataP7.append([totalCases[0][j+3], per, totalCases[i][1]])
                         else:
-                            datatbaseConnect.insertPercentage7D(totalCases[0][j+3], per, totalCases[i][1] + ", " + totalCases[i][0], dbConnection)
+                            dataP7.append([totalCases[0][j + 3], per, totalCases[i][1] + ", " + totalCases[i][0]])
                     except:
                         pass
             except:
                 continue
+        datatbaseConnect.insertPercentage7D(dataP7, dbConnection)
         # total data
+        dataT = []
         print("complete data")
         for i in range(1, l_main):
             len_side = len(totalCases[i])
@@ -234,16 +243,18 @@ def main():
                 try:
                     if (checkNumber):
                         if (totalCases[i][0] == ''):
-                            datatbaseConnect.insertTotalCases(totalCases[0][j], totalCases[i][j], totalCases[i][1], dbConnection)
+                            dataT.append([totalCases[0][j], totalCases[i][j], totalCases[i][1]])
                         else:
-                            datatbaseConnect.insertTotalCases(totalCases[0][j], totalCases[i][j], totalCases[i][1] + ", " + totalCases[i][0], dbConnection)
+                            dataT.append([totalCases[0][j], totalCases[i][j], totalCases[i][1]])
                     else:
                         if (totalCases[i][0] == ''):
-                            datatbaseConnect.insertTotalCases(totalCases[0][j], totalCases[i][j-1], totalCases[i][1], dbConnection)
+                            dataT.append([totalCases[0][j], totalCases[i][j-1], totalCases[i][1]])
+
                         else:
-                            datatbaseConnect.insertTotalCases(totalCases[0][j], totalCases[i][j-1], totalCases[i][1] + ", " + totalCases[i][0], dbConnection)
+                            dataT.append([totalCases[0][j], totalCases[i][j-1], totalCases[i][1] + ", " + totalCases[i][0]])
                 except:
                     pass
+        datatbaseConnect.insertTotalCases(dataT, dbConnection)
     dbConnectionRaw.commit();
     dbConnectionRaw.close()
 
